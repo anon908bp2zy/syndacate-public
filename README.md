@@ -116,7 +116,7 @@ syndacate plotcharpredictions --model_name dPC_lA_mDd5eIh100pI_tBb100e100lCle1E-
 ## Full classification data-efficiency sweeps
 
 ```sh
-ocaps sweep \
+syndacate sweep \
   --dataset ImToClass \
   --model RzCnn \
   --model.RzCnn.embedder CoordConv \
@@ -128,7 +128,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset ImToClass \
   --model CapsNet \
   --trainer BpSpDe \
@@ -138,7 +138,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PreTrainedPartsToClass \
   --model RzCnn \
   --model.RzCnn.embedder CoordConv \
@@ -153,7 +153,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PreTrainedPartsToClass \
   --model CapsNet \
   --trainer BpSpDe \
@@ -163,7 +163,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToClass \
   --model SetTransformer \
   --model.SetTransformer.pooler SetAverage \
@@ -175,7 +175,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToClass \
   --model RzMlp \
   --model.RzMlp.embedder Flatten \
@@ -188,7 +188,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToClass \
   --model RzMlp \
   --model.RzMlp.embedder Flatten \
@@ -201,7 +201,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps comparesweeps \
+syndacate comparesweeps \
   --comparesweeps.config '[
     {
       "series_name":"CNN",
@@ -250,7 +250,7 @@ ocaps comparesweeps \
 ## Full `PartsToChars` depth sweeps
 
 ```sh
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToChars \
   --model SetTransformer \
   --trainer.BpSp.epochs 100 \
@@ -258,7 +258,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToChars \
   --model SetTransformer \
   --model.SetTransformer.model_dim 128 \
@@ -267,7 +267,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToChars \
   --model DeepSetToSet \
   --trainer.BpSp.epochs 100 \
@@ -275,7 +275,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToChars \
   --model RzMlp \
   --model.RzMlp.embedder Flatten \
@@ -287,7 +287,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps sweep \
+syndacate sweep \
   --dataset PartsToChars \
   --model RzMlp \
   --trainer.BpSp.epochs 100 \
@@ -295,7 +295,7 @@ ocaps sweep \
   --sweep.no_cache \
   --sweep.devices '[[0]]'
 
-ocaps comparesweeps \
+syndacate comparesweeps \
   --comparesweeps.config '[
     {
       "series_name":"ST",
