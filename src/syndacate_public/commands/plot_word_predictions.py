@@ -16,8 +16,6 @@ class PlotWordPredictions(juml.base.Command):
     ):
         model_dir, model, dataset = juml.base.Trainer.load(args)
 
-        plotting.set_latex_params(use_times=True)
-
         mp = plotting.MultiPlot(
             cls.plot_split("train", model, dataset, n, plot_seed, threshold),
             cls.plot_split("test",  model, dataset, n, plot_seed, threshold),
