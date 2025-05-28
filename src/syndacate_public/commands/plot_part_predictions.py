@@ -15,7 +15,6 @@ class PlotPartPredictions(juml.base.Command):
         plot_type:  juml.tools.PlotType,
     ):
         model_dir, model, dataset = juml.base.Trainer.load(args)
-        legend_kwargs = {"lw": 5, "ms": 15, "marker": "o"}
 
         mp = plotting.MultiPlot(
             cls.plot_split("train", model, dataset, n, plot_seed, threshold),
