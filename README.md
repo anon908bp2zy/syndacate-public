@@ -265,5 +265,5 @@ syndacate sweep \
   --model.RzCnn.pooler LinearSet2d \
   --trainer.BpSp.epochs 100 \
   --sweep.no_cache \
-  --sweep.devices "[[0]]"
+  --sweep.devices '[[0]]'
 ```
