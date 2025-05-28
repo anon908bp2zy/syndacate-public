@@ -1,15 +1,17 @@
 # syndacate-public
 
-Public code implementation for SynDaCaTE paper.
+Public code implementation for the paper "SynDaCaTE: A Synthetic Dataset For Evaluating Part-Whole Hierarchical Inference".
+
+Results highlights and commands can be found in our attached [Jupyter notebook](syndacate.ipynb). Included in this `README.md` are installation instructions, and commands to replicate the full sweeps shown in Figure 1 in the paper.
 
 ## Contents
 
 - [syndacate-public](#syndacate-public)
   - [Contents](#contents)
   - [Installation](#installation)
-  - [Results highlights](#results-highlights)
   - [Full classification data-efficiency sweeps](#full-classification-data-efficiency-sweeps)
   - [Full `PartsToChars` depth sweeps](#full-partstochars-depth-sweeps)
+  - [Full `ImToParts` results averaged over 5 seeds](#full-imtoparts-results-averaged-over-5-seeds)
 
 ## Installation
 
@@ -34,83 +36,6 @@ syndacate train --dataset PartsToChars --model SetTransformer --trainer.BpSp.epo
 # Time taken for `train` = 21.1465 seconds
 
 syndacate plotcharpredictions --model_name dPC_lA_mSh8m64n2x2.0_tBb100e1lCle1E-05oAol0.001_s0
-```
-
-## Results highlights
-
-```sh
-# CNN vs CapsNet, ImToClass
-syndacate train \
-  --dataset ImToClass \
-  --model RzCnn \
-  --model.RzCnn.embedder CoordConv \
-  --model.RzCnn.pooler Average2d \
-  --trainer BpSpDe \
-  --trainer.BpSpDe.n_train 300 \
-  --trainer.BpSpDe.steps 5000 \
-  --devices 0
-
-syndacate train \
-  --dataset ImToClass \
-  --model CapsNet \
-  --trainer BpSpDe \
-  --trainer.BpSpDe.n_train 300 \
-  --trainer.BpSpDe.steps 5000 \
-  --devices 0
-
-# Best CNN on ImToParts
-syndacate train \
-  --dataset ImToParts \
-  --model RzCnn \
-  --model.RzCnn.embedder CoordConv \
-  --model.RzCnn.pooler LinearSet2d \
-  --trainer.BpSp.epochs 100 \
-  --seed 3 \
-  --devices 0
-
-syndacate plotpartpredictions --model_name dIP_lCH_mRZCb2eCk5m64n3pLs2x2.0_tBb100e100lCle1E-05oAol0.001_s3 --plotpartpredictions.plot_type Show
-
-# CNN vs CapsNet, PreTrainedPartsToClass
-syndacate train \
-  --dataset PreTrainedPartsToClass \
-  --model RzCnn \
-  --model.RzCnn.embedder CoordConv \
-  --model.RzCnn.pooler Average2d \
-  --model.RzCnn.num_stages 1 \
-  --model.RzCnn.blocks_per_stage 3 \
-  --model.RzCnn.stride 1 \
-  --trainer BpSpDe \
-  --trainer.BpSpDe.steps 5000 \
-  --devices 0
-
-syndacate train \
-  --dataset PreTrainedPartsToClass \
-  --model CapsNet \
-  --trainer BpSpDe \
-  --trainer.BpSpDe.steps 5000 \
-  --devices 0
-
-# Best SetTransformer on PartsToChars
-syndacate train \
-  --dataset PartsToChars \
-  --model SetTransformer \
-  --model.SetTransformer.depth 5 \
-  --trainer.BpSp.epochs 100 \
-  --seed 3 \
-  --devices 0
-
-syndacate plotcharpredictions --model_name dPC_lA_mSd5eIh8m64pIx2.0_tBb100e100lCle1E-05oAol0.001_s3 --plotcharpredictions.plot_type Show
-
-# Best DeepSetToSet on PartsToChars
-syndacate train \
-  --dataset PartsToChars \
-  --model DeepSetToSet \
-  --model.DeepSetToSet.depth 5 \
-  --trainer.BpSp.epochs 100 \
-  --seed 2 \
-  --devices 0
-
-syndacate plotcharpredictions --model_name dPC_lA_mDd5eIh100pI_tBb100e100lCle1E-05oAol0.001_s2 --plotcharpredictions.plot_type Show
 ```
 
 ## Full classification data-efficiency sweeps
@@ -328,4 +253,17 @@ syndacate comparesweeps \
   --comparesweeps.name pc_depth \
   --comparesweeps.plot_type Show \
   --dataset PartsToChars
+```
+
+## Full `ImToParts` results averaged over 5 seeds
+
+```
+syndacate sweep \
+  --dataset ImToParts \
+  --model RzCnn \
+  --model.RzCnn.embedder CoordConv \
+  --model.RzCnn.pooler LinearSet2d \
+  --trainer.BpSp.epochs 100 \
+  --sweep.no_cache \
+  --sweep.devices "[[0]]"
 ```
